@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Personenverwaltung</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/bootstrap-5.0.2-dist/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1>Personenverwaltung</h1>
+    <h3>Übersicht</h3>
+    <hr>
+    <table class="table table-responsive-sm">
+        <thead>
+        <tr>
+            <th scope="col">Vorname</th>
+            <th scope="col">Nachname</th>
+            <th scope="col">Email</th>
+            <th scope="col">Geschlecht</th>
+            <th scope="col">Geburtstag</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="person: ${persons}">
+            <td th:text="${person.firstname}"></td>
+            <td th:text="${person.lastname}"></td>
+            <td th:text="${person.email}"></td>
+            <td th:text="${person.gender}"></td>
+            <td th:text="${#dates.format(person.birthday, 'dd.MM.yyyy')}"></td>
+            <td>
+                <a th:href="'http://localhost:8080/formedit?id=' + ${person.id}">
+                    <button type="button" class="btn btn-primary">bearbeiten</button>
+                </a></td>
+            <td>
+                <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal">löschen
+                </button>
+            </td>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Warning</h5>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this person?
+                        </div>
+                        <div class="modal-footer">
+                            <a th:href="'http://localhost:8080/'">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            </a>
+                            <a th:href="'http://localhost:8080/delete?id=' + ${person.id}">
+                                <button type="button" class="btn btn-danger">Delete</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="'http://localhost:8080/formcreate'">
+        <button type="button" class="btn btn-success">Person hinzufügen</button>
+    </a>
+</div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:src="@{/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

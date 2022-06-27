@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Person bearbeiten</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/bootstrap-5.0.2-dist/css/bootstrap.min.css}"/>
+</head>
+<body>
+<div class="container">
+    <h1>Personenverwaltung</h1>
+    <h3>Person bearbeiten</h3>
+    <hr>
+    <form action="#" th:action="'http://localhost:8080/submit?id=' + ${person.id}" th:object="${person}" method="post">
+        <p>Vorname <input class="form-control" required type="text" th:field="*{firstname}"/></p>
+        <p>Nachname: <input class="form-control" required type="text" th:field="*{lastname}"/></p>
+        <p>Email: <input class="form-control" required type="email" th:field="*{email}"/></p>
+        <p>Geschlecht: <input class="form-control" required type="text" th:field="*{gender}"/></p>
+        <p>Geburtstag: <input class="form-control" required type="date" th:field="*{birthday}"/></p>
+        <div>
+            <a href="http://localhost:8080">
+                <button type="button" class="btn btn-danger">Abbrechen</button>
+            </a>
+            <input class="btn btn-primary" type="submit" value="Speichern"/>
+        </div>
+    </form>
+    <div class="alert alert-danger" role="alert" th:if="${message}" th:text="${message}">
+    </div>
+</div>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:src="@{/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
